@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <title>Document</title>
     <style>
-        h1{
-            margin-top: 50px ;
+        .vl {
+            border-left: 1px solid black;
+            height: 350px;
         }
     </style>
 </head>
@@ -28,42 +29,54 @@
             <div class="col-3"></div>
         </div>
     </div>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6" id="recipe-result">
 
-            </div>
-            <div class="col-3"></div>
+
+    <div class="container mt-3">
+        <div class="row" id="recipe-result">
+
         </div>
     </div>
-    <div class="container mt-3">
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6">
+
+
+    <div class="container mt-3 ">
+        <div class="row" id="show">
+            <div class="col-2"></div>
+            <div class="col-4">
+                <h3>Number of Person</h3>
+            </div>
+            <div class="col-4">
                 <form action="#">
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-4">
                         <div class="input-group-append">
-                            <button class="btn btn-success" id="minus" type="button">-</button>
+                            <button class="btn btn-outline-success" id="minus" type="button">-</button>
                         </div>
-                        <input type="text" disabled selected id="submit" class="form-control text-center" value=0 min="1" max="15">
+                        <div class="input-group-append" id="input">
+
+                        </div>
                         <div class="input-group-append">
-                            <button class="btn btn-success" id="add" type="button">+</button>
+                            <button class="btn btn-outline-success" id="add" type="button">+</button>
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="col-3"></div>
+            <div class="col-2"></div>
         </div>
     </div>
+
+
     <div class="container mt-5">
         <div class="row">
-            <div class="col-6">
+            <div class="col-2"></div>
+            <div class="col-4">
                 <table class="table table-borderless" id="ingredient-result">
-
+                    <h3 class="ing">Ingredient</h3>
                 </table>
             </div>
-            <div class="col-6" id="instruction-result"></div>
+            <div class="vl" id="vl"></div>
+            <div class="col-4" id="instruction-result">
+                <h3 class="ins">Instruction</h3>
+            </div>
+            <div class="col-2"></div>
         </div>
     </div>
     <script src="js/jquery-3.4.1.min.js"></script>
