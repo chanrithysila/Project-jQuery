@@ -1,18 +1,17 @@
-
+var addPerson;
 $(document).ready(function () {
     requestApi();
+    $('#add').on('click', function () {
+        var addPerson = $('#submit').val();
+        getAdd(addPerson);
+    })
+    $('#minus').on('click', function () {
+        var minusPerson = $('#submit').val();
+        getMinus(minusPerson);
+    })
     $('#recipe').on('change', () => {
         var recipeId = $('#recipe').val();
         getRecipe(recipeId);
-        $('#add').on('click', function () {
-            var addPerson = $('#submit').val();
-            getAdd(addPerson);
-
-        })
-        $('#minus').on('click', function () {
-            var minusPerson = $('#submit').val();
-            getMinus(minusPerson);
-        })
     })
 })
 
@@ -20,6 +19,7 @@ function getUrl() {
     var url = "https://raw.githubusercontent.com/radytrainer/test-api/master/test.json";
     return url;
 }
+// get api
 function requestApi() {
     $.ajax({
         dataType: 'json',
@@ -29,6 +29,7 @@ function requestApi() {
     })
 }
 var allData = [];
+// choose recipe from select
 function chooseRecipe(recipe) {
     allData = recipe;
     var option = "";
@@ -39,6 +40,7 @@ function chooseRecipe(recipe) {
     })
     $('#recipe').append(option);
 }
+// get all recipe
 function getRecipe(id) {
     allData.forEach(item => {
         if (item.id == id) {
@@ -50,6 +52,7 @@ function getRecipe(id) {
     });
 }
 $('#show').hide();
+//display guest
 function eachGuest(guest) {
     var result = "";
     result += `
@@ -58,6 +61,7 @@ function eachGuest(guest) {
     $('#input').html(result);
     $('#show').show();
 }
+//display recipe
 function eachRecipe(name, img) {
     var result = "";
     result += `
@@ -72,8 +76,9 @@ function eachRecipe(name, img) {
     `;
     $('#recipe-result').html(result);
 }
+$('#ins').hide();
+//display step in table
 function eachestep(instruction) {
-    $('#instruction').hide();
     var result = "";
     var splitStep = instruction.split('<step>');
     for (let i = 1; i < splitStep.length; i++) {
@@ -83,10 +88,11 @@ function eachestep(instruction) {
             `;
     }
     $('#instruction-result').html(result);
-    $('instruction').show();
+    $('#ins').show();
 }
 $('#vl').hide();
-$('#inggredient-result').hide();
+$('#ing').hide();
+// display ingrediant in table
 function eachIngredient(ing) {
     var result = "";
     ing.forEach(element => {
@@ -101,15 +107,17 @@ function eachIngredient(ing) {
         `;
         $('#ingredient-result').html(result);
         $('#vl').show();
-        $('#ingredient-result').show();
+        $('#ing').show();
     })
 }
+//add person 
 function getAdd(person) {
     var add = parseInt(person) + 1;
     if (add <= 15) {
         $('#submit').val(add);
     }
 }
+//move person
 function getMinus(person) {
     var minus = parseInt(person) - 1;
     if (minus >= 1) {
