@@ -1,14 +1,6 @@
 var addPerson;
 $(document).ready(function () {
     requestApi();
-    $('#add').on('click', function () {
-        var addPerson = $('#submit').val();
-        getAdd(addPerson);
-    })
-    $('#minus').on('click', function () {
-        var minusPerson = $('#submit').val();
-        getMinus(minusPerson);
-    })
     $('#recipe').on('change', () => {
         var recipeId = $('#recipe').val();
         getRecipe(recipeId);
@@ -41,6 +33,8 @@ function chooseRecipe(recipe) {
     $('#recipe').append(option);
 }
 // get all recipe
+var oldGuest;
+var newGuest;
 function getRecipe(id) {
     allData.forEach(item => {
         if (item.id == id) {
@@ -48,6 +42,10 @@ function getRecipe(id) {
             eachIngredient(item.ingredients);
             eachGuest(item.nbGuests);
             eachestep(item.instructions);
+            //get oldGuest
+            oldGuest= item.nbGuests;
+            //get all data from api
+            newGuest=item;
         }
     });
 }
@@ -67,7 +65,9 @@ function eachRecipe(name, img) {
     result += `
         <div class="col-3"></div>
         <div class="col-3" >
-            <h1 class="text-center" >${name}</h1>
+            <div class="card" id="card">
+                <h1 class="text-center" >${name}</h1>
+            </div>
         </div>
         <div class="col-3" >
             <img src="${img}" width="200" height="200" class="img-fluid mx-auto d-block">
@@ -90,9 +90,8 @@ function eachestep(instruction) {
     $('#instruction-result').html(result);
     $('#ins').show();
 }
-$('#vl').hide();
 $('#ing').hide();
-// display ingrediant in table
+// display default ingrediant in table
 function eachIngredient(ing) {
     var result = "";
     ing.forEach(element => {
@@ -106,21 +105,39 @@ function eachIngredient(ing) {
                 </tr> 
         `;
         $('#ingredient-result').html(result);
-        $('#vl').show();
         $('#ing').show();
     })
 }
-//add person 
-function getAdd(person) {
-    var add = parseInt(person) + 1;
+//when click button
+$('#add').on('click', function () {
+    var addPerson = $('#submit').val();
+    var add = parseInt(addPerson) + 1;
     if (add <= 15) {
         $('#submit').val(add);
+        calculate( $('#submit').val());
     }
-}
-//move person
-function getMinus(person) {
-    var minus = parseInt(person) - 1;
+})
+$('#minus').on('click', function () {
+    var minusPerson = $('#submit').val();
+    var minus = parseInt(minusPerson) - 1;
     if (minus >= 1) {
         $('#submit').val(minus);
+        calculate( $('#submit').val());
     }
+})
+//Calculate number of guest
+function calculate(numbers){
+    var getValue= "";
+    newGuest.ingredients.forEach(el => {
+        const {iconUrl,quantity,unit,name} = el;
+        getValue +=`
+        <tr class="mt-5">
+        <td><img src="${iconUrl}" width="70" class="img-fluid"></td>
+        <td>${quantity * numbers / oldGuest}</td>
+        <td>${unit[0]}</td>
+        <td>${name}</td>
+    </tr> 
+        `;
+        $('#ingredient-result').html(getValue);
+    })
 }
