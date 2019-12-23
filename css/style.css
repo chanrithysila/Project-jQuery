@@ -8,9 +8,17 @@ body {
 .card-body{
     background-image: url(img/1.jpg);
 }
-.card{
-    background:  #ffffb3;
-}
+
 #card{
-    background: #ffffb3;
+    background: #79d2a6;
+    height: 150px;
+}
+h4{
+    color: #79d2a6;
+}
+.ing{
+    background: #79d2a6; 
+}
+.ins{
+    background: #79d2a6;
 }

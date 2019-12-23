@@ -66,18 +66,19 @@ function eachRecipe(name, img) {
         <div class="col-3"></div>
         <div class="col-3" >
             <div class="card" id="card">
-                <h1 class="text-center" >${name}</h1>
+                <h1 class="text-center text-white" >${name}</h1>
             </div>
         </div>
-        <div class="col-3" >
+        <div class="col-3">
             <img src="${img}" width="200" height="200" class="img-fluid mx-auto d-block">
         </div>
         <div class="col-3"></div>
     `;
     $('#recipe-result').html(result);
 }
-$('#ins').hide();
 //display step in table
+$('#ins').hide();
+$('#background').hide();
 function eachestep(instruction) {
     var result = "";
     var splitStep = instruction.split('<step>');
@@ -89,9 +90,11 @@ function eachestep(instruction) {
     }
     $('#instruction-result').html(result);
     $('#ins').show();
+    $('#background').show();
 }
-$('#ing').hide();
 // display default ingrediant in table
+$('#ing').hide();
+$('#color').hide();
 function eachIngredient(ing) {
     var result = "";
     ing.forEach(element => {
@@ -106,6 +109,7 @@ function eachIngredient(ing) {
         `;
         $('#ingredient-result').html(result);
         $('#ing').show();
+        $('#color').show();
     })
 }
 //when click button
