@@ -1,4 +1,3 @@
-var addPerson;
 $(document).ready(function () {
     requestApi();
     $('#recipe').on('change', () => {
@@ -27,7 +26,7 @@ function chooseRecipe(recipe) {
     var option = "";
     recipe.forEach(item => {
         option += `
-            <option value = "${item.id}">${item.name}</option>
+            <option style="color:  #79d2a6;" value = "${item.id}">${item.name}</option>
         `;
     })
     $('#recipe').append(option);
@@ -50,7 +49,7 @@ function getRecipe(id) {
     });
 }
 $('#show').hide();
-//display guest
+//display number of guest
 function eachGuest(guest) {
     var result = "";
     result += `
@@ -85,7 +84,7 @@ function eachestep(instruction) {
     for (let i = 1; i < splitStep.length; i++) {
         result += `
                 <h5 class = "text-primary mt-3">Step: ${i}</h5>
-                <p class = "mt-3">${splitStep[i]}</p>
+                <p class = " text-white mt-3">${splitStep[i]}</p>
             `;
     }
     $('#instruction-result').html(result);
@@ -100,7 +99,7 @@ function eachIngredient(ing) {
     ing.forEach(element => {
         const { iconUrl, quantity, unit, name } = element;
         result += `
-                <tr class="mt-5">
+                <tr class=" text-white mt-5">
                     <td><img src="${iconUrl}" width="70" class="img-fluid"></td>
                     <td>${quantity}</td>
                     <td>${unit[0]}</td>
@@ -112,7 +111,7 @@ function eachIngredient(ing) {
         $('#color').show();
     })
 }
-//when click button
+//when click button to calculate 
 $('#add').on('click', function () {
     var addPerson = $('#submit').val();
     var add = parseInt(addPerson) + 1;
